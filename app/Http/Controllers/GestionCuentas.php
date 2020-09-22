@@ -44,4 +44,26 @@ class GestionCuentas extends Controller
         return response()->json(['amount'=>$amount]);
     }
 
+
+    public function updateamount(Request $request)
+    {
+        $account=Account::where('number',$request->number)->get();
+        // 0 deposito
+        if($request->operacion==0)
+        {
+            $account->increment('amount',$request->amount);
+
+        }
+        else{
+            //1 retiro
+            if($request->operacion==1)
+            {
+                $account->decrement('amount',$request->amount);
+            }
+        }
+
+        return response()->json('la cuenta fue actualizada correctamente');
+
+    }
+
 }
