@@ -45,20 +45,20 @@ class GestionCuentas extends Controller
     }
 
 
-    public function updateamount(Request $request)
+    public function updateamount(Request $request,$number_account)
     {
 
                 // 0 deposito
         if($request->operacion==0)
         {
-                 Account::where('number',$request->number)->increment('amount',$request->amount);
+                 Account::where('number',$number_account)->increment('amount',$request->amount);
 
         }
         else{
             //1 retiro
             if($request->operacion==1)
             {
-                Account::where('number',$request->number)->decrement('amount',$request->amount);
+                Account::where('number',$number_account)->decrement('amount',$request->amount);
             }
         }
 

@@ -22,5 +22,5 @@ $router->group(['prefix'=>'api/v1'],function () use ($router){
     $router->post('createaccount','GestionCuentas@createaccount');
     $router->get('listaccounts','GestionCuentas@listaccounts');
     $router->get('checkbalance/{number_account}','GestionCuentas@checkbalance');
-    $router->post('updateamount','GestionCuentas@updateamount');
+    $router->put('updateamount/{number_account}','GestionCuentas@updateamount');
 });
