@@ -11,7 +11,7 @@ use App\Http\Requests\ClienteRequest;
 
 class GestionCuentas extends Controller
 {
-    public function createclient(ClienteRequest $request)
+    public function createclient(Request $request)
     {
      Client::create($request->all());
 
