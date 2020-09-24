@@ -15,7 +15,7 @@ class GestionCuentas extends Controller
     {
      Client::create($request->all());
 
-     return response()->json('cliente creado correctamente');
+     return response()->json(['message'=>'cliente creado correctamente']);
     }
 
     public function listclients()
@@ -27,7 +27,7 @@ class GestionCuentas extends Controller
     public function createaccount(Request $request)
     {
         Account::create($request->all());
-        return response()->json('cuenta creada correctamente');
+        return response()->json(['message'=>'cuenta creada correctamente']);
     }
 
     public function listaccounts()
@@ -63,7 +63,7 @@ class GestionCuentas extends Controller
             }
         }
 
-        return response()->json('la cuenta fue actualizada correctamente');
+        return response()->json(['message'=>'la cuenta fue actualizada correctamente']);
 
     }
 
