@@ -7,10 +7,11 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Requests\ClienteRequest;
 
 class GestionCuentas extends Controller
 {
-    public function createclient(Request $request)
+    public function createclient(ClienteRequest $request)
     {
      Client::create($request->all());
 
