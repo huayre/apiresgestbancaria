@@ -67,4 +67,16 @@ class GestionCuentas extends Controller
 
     }
 
+    public function showaccount($number_account)
+    {
+        $account=Account::where('number',$number_account)->get();      
+       return response()->json($account);
+    }
+    
+    public function showaclient($id_client)
+    {
+        $client=Client::find($id_client);        
+       return response()->json($client);
+    }
+
 }

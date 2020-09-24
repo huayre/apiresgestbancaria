@@ -24,5 +24,7 @@ $router->get('/', function () use ($router) {
         $router->get('listaccounts','GestionCuentas@listaccounts');
         $router->get('checkbalance/{number_account}','GestionCuentas@checkbalance');
         $router->put('updateamount/{number_account}','GestionCuentas@updateamount');
+        $router->get('showaccount/{number_account}','GestionCuentas@showaccount');
+        $router->get('showclient/{id_client}','GestionCuentas@showaclient');
     });
 //});
