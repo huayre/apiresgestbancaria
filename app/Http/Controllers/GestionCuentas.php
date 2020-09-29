@@ -7,33 +7,72 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Client;
 use Illuminate\Http\Request;
-use App\Http\Requests\ClienteRequest;
+use Illuminate\Support\Facades\Validator;
 
 class GestionCuentas extends Controller
 {
     public function createclient(Request $request)
     {
-     Client::create($request->all());
+        $data=$this->validate($request,[
+            'name'      =>'required',
+            'lastname'  =>'required',
+            'sex'       =>'required'
+        ]);
+               
 
-     return response()->json(['message'=>'cliente creado correctamente']);
+        $client=Client::create($data);
+
+        if(isset($client))
+        {
+            return response()->json(['message'=>'cliente creado correctamente']);
+        }
+
+     
     }
 
     public function listclients()
     {
         $ListClients=Client::all();
-        return response()->json($ListClients);
+        if(isset($ListClients))
+        {
+            return response()->json($ListClients);
+        }
+        else
+        {
+            return response()->json(['message'=>'no hay registros']);
+        }
+
+       
     }
 
     public function createaccount(Request $request)
-    {
-        Account::create($request->all());
-        return response()->json(['message'=>'cuenta creada correctamente']);
+    {   
+        $data=$this->validate($request,[
+            'number'          =>'required|unique:accounts',
+            'type'            =>'required',
+            'client_id'       =>'required',
+            'amount'          =>'required'
+        ]);
+
+        $account=Account::create($data);
+        if(isset($account))
+        {
+            return response()->json(['message'=>'cuenta creada correctamente']);
+        }
     }
 
     public function listaccounts()
     {
         $Listaccounts=Account::all();
-        return response()->json($Listaccounts);
+        if(isset($Listaccounts))
+        {
+            return response()->json($Listaccounts);
+        }
+        else
+        {
+            return response()->json(['message'=>'no hay registros']);
+        }        
+        
     }
 
     public function  checkbalance($number_account){
@@ -72,7 +111,7 @@ class GestionCuentas extends Controller
         $account=Account::where('number',$number_account)->get();      
        return response()->json($account);
     }
-    
+
     public function showaclient($id_client)
     {
         $client=Client::find($id_client);        
