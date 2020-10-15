@@ -16,8 +16,15 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-//$router->group(['middleware' => 'auth'], function () use ($router){
-    $router->group(['prefix'=>'api/v1'],function () use ($router){
+
+
+
+$router->group(['prefix'=>'api/v1'],function () use ($router){
+
+    $router->post('register','AuthController@register');
+    $router->post('login','AuthController@login');
+
+    $router->group(['middleware' => 'auth'], function () use ($router){
         $router->post('createclient','GestionCuentas@createclient');
         $router->get('listclients','GestionCuentas@listclients');
         $router->post('createaccount','GestionCuentas@createaccount');
@@ -27,4 +34,4 @@ $router->get('/', function () use ($router) {
         $router->get('showaccount/{number_account}','GestionCuentas@showaccount');
         $router->get('showclient/{id_client}','GestionCuentas@showaclient');
     });
-//});
+});

@@ -22,8 +22,11 @@ date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
+$app = new \Dusterio\LumenPassport\Lumen7Application(
+    dirname(__DIR__)
+);
 
-// $app->withFacades();
+ $app->withFacades();
 
  $app->withEloquent();
 
@@ -98,8 +101,12 @@ $app->middleware([
     Fruitcake\Cors\HandleCors::class,
 ]);
 
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+$app->configure('auth');
+\Dusterio\LumenPassport\LumenPassport::routes($app);
 // $app->register(App\Providers\AppServiceProvider::class);
- $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 /*
