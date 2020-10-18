@@ -37,4 +37,19 @@ class AuthController extends Controller
 
     }
 
+    public function gettoken()
+    {  
+        $email='prueba@gmail.com';
+        $password='123456789';
+        $user=User::where('email',$email)->first();
+        if(isset($user) && Hash::check($password,$user->password))
+         {
+            $token=$user->createToken('Token Name')->accessToken;
+            return response()->json(['token'=>$token]);
+         }
+        else{
+            return response()->json(['mensaje'=>'credenciales incorrectas']);
+        } 
+    }
+
 }
